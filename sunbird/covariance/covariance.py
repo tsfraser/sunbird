@@ -17,7 +17,7 @@ class CovarianceMatrix:
         select_filters: Dict = None,
         covariance_data_class: str = 'AbacusSmall',
         emulator_data_class: str = 'Abacus',
-        dataset: str = 'bossprior',
+        #dataset: str = None,
         output_transforms: Optional[Callable] = None,
         emulators=None,
         path_to_models: Path = MODEL_PATH,
@@ -30,26 +30,27 @@ class CovarianceMatrix:
             slice_filters (Dict): dictionary with slice filters on given coordinates
             select_filters (Dict): dictionary with select filters on given coordinates
         """
-        self.dataset = dataset
+        #self.dataset = dataset
+        #print(self.dataset,covariance_data_class)
         self.data_reader = getattr(data_readers, covariance_data_class)(
             statistics=statistics,
             slice_filters=slice_filters,
             select_filters=select_filters,
             transforms=output_transforms,
-            dataset=dataset,
+            #dataset=dataset,
         )
-        self.covariance_simulations_reader = getattr(data_readers, "AbacusSmall")(
+        self.covariance_simulations_reader = getattr(data_readers, "Patchy")(
             statistics=statistics,
             slice_filters=slice_filters,
             select_filters=select_filters,
             transforms=output_transforms,
-            dataset=dataset,
+            #dataset=dataset,
         )
         self.training_simulations_reader = getattr(data_readers, emulator_data_class)(
-            dataset=dataset,
             statistics=statistics,
             slice_filters=slice_filters,
             select_filters=select_filters,
+            #idataset=dataset,
         )
         self.covariance_data_class = covariance_data_class
         self.statistics = statistics
