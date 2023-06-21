@@ -3,7 +3,7 @@ import numpy as np
 from pathlib import Path
 import jax.numpy as jnp
 from sunbird.summaries.base import BaseSummary
-from sunbird.summaries import TPCF, DensitySplitAuto, DensitySplitCross, DensityPDF
+from sunbird.summaries import TPCF, DensitySplitAuto, DensitySplitCross, DensityPDF,Voids
 
 
 DEFAULT_PATH = Path(__file__).parent.parent.parent / "trained_models/best/"
@@ -27,6 +27,12 @@ class Bundle(BaseSummary):
         """
         self.summaries = summaries
         self.flax = flax 
+        #self.all_summaries = {
+        #    'voids': Voids(),
+        #    'tpcf': TPCF(),
+        #    'density_split_cross': DensitySplitCross(),
+        #    'density_split_auto': DensitySplitAuto(),
+        #} 
         self.all_summaries = {
             # "tpcf": TPCF(
             #     dataset=dataset,
@@ -35,6 +41,13 @@ class Bundle(BaseSummary):
             #     n_hod_realizations=n_hod_realizations,
             #     suffix=suffix,
             # ),
+            "voids": Voids(dataset=dataset,
+                loss = loss,
+                flax = flax,
+                n_hod_realizations=n_hod_realizations,
+                suffix =suffix,
+                path_to_models = path_to_models,
+            ),
             "density_split_cross": DensitySplitCross(
                 dataset=dataset,
                 loss=loss,
