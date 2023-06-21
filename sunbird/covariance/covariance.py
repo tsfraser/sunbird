@@ -16,8 +16,8 @@ class CovarianceMatrix:
         slice_filters: Dict = None,
         select_filters: Dict = None,
         covariance_data_class: str = 'AbacusSmall',
-        emulator_data_class: str = 'Abacus',
-        #dataset: str = None,
+        emulator_data_class: str = 'AbacusCutSky',
+        dataset: str = None,
         output_transforms: Optional[Callable] = None,
         emulators=None,
         path_to_models: Path = MODEL_PATH,
@@ -30,7 +30,7 @@ class CovarianceMatrix:
             slice_filters (Dict): dictionary with slice filters on given coordinates
             select_filters (Dict): dictionary with select filters on given coordinates
         """
-        #self.dataset = dataset
+        self.dataset = dataset
         #print(self.dataset,covariance_data_class)
         self.data_reader = getattr(data_readers, covariance_data_class)(
             statistics=statistics,
@@ -147,11 +147,11 @@ class CovarianceMatrix:
         """
         if self.emulators is None:
             from sunbird.summaries import DensitySplitAuto, DensitySplitCross, TPCF, Voids
-
+            print(self.dataset,self.path_to_models)
             self.emulators = {
-                "density_split_cross": DensitySplitCross(dataset=self.dataset, path_to_models=self.path_to_models),
-                "density_split_auto": DensitySplitAuto(dataset=self.dataset, path_to_models=self.path_to_models),
-                "tpcf": TPCF(dataset=self.dataset, path_to_models=self.path_to_models),
+                #"density_split_cross": DensitySplitCross(dataset=self.dataset, path_to_models=self.path_to_models),
+                #"density_split_auto": DensitySplitAuto(dataset=self.dataset, path_to_models=self.path_to_models),
+                #"tpcf": TPCF(dataset=self.dataset, path_to_models=self.path_to_models),
                 "voids": Voids(dataset=self.dataset, path_to_models=self.path_to_models),
             }
         xi_model = []
