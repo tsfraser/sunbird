@@ -241,10 +241,10 @@ class BaseSummary:
         if use_xarray:
             #if return_errors:
                 #return prediction, errors
-            return prediction
+            return prediction,errors
         #if return_errors:
             #return prediction.reshape(-1), errors.reshape(-1)
-        return prediction.reshape(-1)
+        return prediction.reshape(-1),errors.reshape(-1)
 
     def find_index(self, arr, num, mode="below"):
         if mode == "below":
@@ -379,7 +379,7 @@ class BaseSummary:
             #return_errors=return_errors,
         )
 
-    def get_for_sample(self, inputs, select_filters, slice_filters, use_xarray, return_errors):
+    def get_for_sample(self, inputs, select_filters, slice_filters, use_xarray):#, return_errors):
         return self.forward(
             inputs,
             select_filters=select_filters,
