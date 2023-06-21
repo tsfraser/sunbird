@@ -239,8 +239,8 @@ class BaseSummary:
             use_xarray=use_xarray,
         )
         if use_xarray:
-            if return_errors:
-                return prediction, errors
+            #if return_errors:
+                #return prediction, errors
             return prediction
         #if return_errors:
             #return prediction.reshape(-1), errors.reshape(-1)
