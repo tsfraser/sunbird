@@ -28,13 +28,14 @@ class Bundle(BaseSummary):
         self.summaries = summaries
         self.flax = flax 
         self.all_summaries = {
-            # "tpcf": TPCF(
-            #     dataset=dataset,
-            #     loss=loss,
-            #     flax=flax,
-            #     n_hod_realizations=n_hod_realizations,
-            #     suffix=suffix,
-            # ),
+            "tpcf": TPCF(
+                dataset=dataset,
+                loss=loss,
+                flax=flax,
+                n_hod_realizations=n_hod_realizations,
+                path_to_models=path_to_models,
+                suffix=suffix,
+            ),
             "density_split_cross": DensitySplitCross(
                 dataset=dataset,
                 loss=loss,
