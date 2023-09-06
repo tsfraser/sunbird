@@ -17,7 +17,7 @@ export SLURM_CPU_BIND="cores"
 ACT_FN=SiLU
 
 python optimise.py \
---run_name peaky \
+--run_name ninetails \
 --model_dir ./trained_models/ \
 --statistic voids \
 --select_multipoles 0 2 \

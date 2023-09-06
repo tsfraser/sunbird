@@ -20,14 +20,14 @@ if __name__ == "__main__":
     config["data"]["observation"]["get_obs_args"]["cosmology"] = args.cosmology
     config["data"]["observation"]["get_obs_args"]["hod_idx"] = args.hod_idx
     loss = config["theory_model"]["args"]["loss"]
-    vol = config["data"]["covariance"]["volume_scaling"]
+    #vol = config["data"]["covariance"]["volume_scaling"]
     smin = config["slice_filters"]["s"][0]
     smax = config["slice_filters"]["s"][1]
     statistics = "_".join([i for i in config["statistics"]])
     multipoles = ''.join([str(i) for i in config["select_filters"]["multipoles"]])
     #quintiles = ''.join([str(i) for i in config["select_filters"]["quintiles"]])
     dir_store = f"abacus_cosmo{args.cosmology}_hod{args.hod_idx}_{statistics}_"\
-                f"{loss}_vol{vol}_smin{smin:.2f}_smax{smax:.2f}_m{multipoles}"
+                f"{loss}_smin{smin:.2f}_smax{smax:.2f}_m{multipoles}"
     if args.suffix is not None:
         dir_store += f"_{args.suffix}"
     config["inference"]["output_dir"] = output_path / dir_store

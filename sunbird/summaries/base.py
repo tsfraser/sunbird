@@ -438,7 +438,7 @@ class BaseSummaryFolder(BaseSummary):
         self,
         statistic: str,
         dataset: str,
-        loss: str = "mae",
+        loss: str = "learned_gaussian",
         n_hod_realizations: Optional[int] = None,
         suffix: Optional[str] = None,
         path_to_models: Path = DEFAULT_PATH,

@@ -2,7 +2,7 @@ slice_filters:
     s: [0.7, 120.0]
 select_filters:
     #quintiles: [0, 4]
-    multipoles: [0, 2]
+    multipoles: [0,2]
 statistics: ['voids']
 data:
     observation: 
@@ -11,23 +11,22 @@ data:
             dataset: 'voidprior'
         get_obs_args:
             cosmology: 0
-            hod_idx: 121
+            hod_idx: 80
     covariance:
         class: 'Patchy'
         dataset: 'voidprior'
-        add_emulator_error_test_set: true
+        add_emulator_error_test_set: false
         add_predicted_uncertainty: false
-        add_simulation_error: true
-        volume_scaling: 64
+        add_simulation_error: false
+        volume_scaling: 1
 # fixed_parameters: ['w0_fld', 'wa_fld', 'nrun', 'N_ur'] 
-# fixed_parameters:  ['omega_b', 'sigma8_m', 'n_s', 'nrun', 'N_ur', 'w0_fld', 'wa_fld', 'logM1', 'logM_cut', 'alpha', 'alpha_s', 'alpha_c', 'logsigma', 'kappa', 'B_cen', 'B_sat']
-fixed_parameters: []
+fixed_parameters:  ['nrun', 'N_ur', 'w0_fld', 'wa_fld','logM_cut','sigma','logM1','alpha','kappa']
 theory_model:
     module: 'sunbird.summaries'
     class: 'Bundle'
     args:
         dataset: 'voidprior'
-        loss: 'mae'
+        loss: 'mse'
         path_to_models: '/global/homes/t/tsfraser/fraser_fork/sunbird/trained_models/best/'
         flax: false
 inference:
@@ -35,12 +34,12 @@ inference:
 priors:
     stats_module: 'scipy.stats'
     omega_b:
-        #distribution: 'norm'
-        #mean: 0.02268
-        #dispersion: 0.00038
-        distribution: 'uniform'
-        min: 0.02100
-        max: 0.02500
+        distribution: 'norm'
+        mean: 0.02268
+        dispersion: 0.00038
+        #distribution: 'uniform'
+        #min: 0.02100
+        #max: 0.02500
     omega_cdm:
         distribution: 'uniform'
         min: 0.1032
@@ -73,11 +72,11 @@ priors:
         distribution: 'uniform'
         min: -0.628
         max: 0.621
-    logM1:
+    logM_cut:
         distribution: 'uniform'
         min: 12
         max: 14.5
-    logM_cut:
+    logM1:
         distribution: 'uniform'
         min: 13
         max: 16
@@ -85,18 +84,10 @@ priors:
         distribution: 'uniform'
         min: 0.4
         max: 1.5
-    alpha_s:
-        distribution: 'uniform'
-        min: 0.
-        max: 1.
-    alpha_c:
-        distribution: 'uniform'
-        min: 0.
-        max: 1.
     sigma:
         distribution: 'uniform'
         min: 0.05
-        max: 1.5
+        max: 0.9
     kappa:
         distribution: 'uniform'
         min: 0.05
